@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Polymer Component Builder</title>
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .margin20 {
+            margin-top: 20px;
+        }
+        .margin10 {
+            margin-top: 10px;
+        }
+        .marginLeft5 {
+            margin-left: 5px;
+        }
+        #leftContainer {
+            border-right-style: solid;
+            border-right-color: gray;
+        }
+        .pointer {
+            cursor: pointer;
+        }
+        .CodeMirror {
+          border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="mainForm">
+        <div class="container-fluid" id="mainContainer">
+            <div class="row">
+                <div id="leftContainer" class="col-md-2 margin20">
+                    <!--<span class="glyphicon pull-right pointer glyphicon-chevron-left" style="right: 0px; position: absolute; "id="btnToggleLeftContainer"></span> -->
+                    <div class="">
+                        <div class="form-group">
+                            <input type="text" id="txtComponentName" class="form-control" placeholder="Component Name" value="demo">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="txtComponentDesc" class="form-control" placeholder="Component Description"></textarea>
+                        </div>
+                        <hr />
+                        <span>Add Polymer components</span>
+                        <div class="form-group margin10">
+                            <select id="componentList" style="width: 90%" class="btn btn-default">
+                                <option value="">Add Component</option>
+                                <option value="paper-badge/paper-badge.html">paper-badge</option>
+                                <option value="paper-behaviors/paper-button-behavior.html">paper-button-behavior</option>
+                                <option value="paper-behaviors/paper-inky-focus-behavior.html">paper-inky-focus-behavior</option>
+                                <option value="paper-button/paper-button.html">paper-button</option>
+                                <option value="paper-card/paper-card.html">paper-card</option>
+                                <option value="paper-checkbox/paper-checkbox.html">paper-checkbox</option>
+                                <option value="paper-dialog/paper-dialog.html">paper-dialog</option>
+                                <option value="paper-dialog-behavior/paper-dialog-behavior.html">paper-dialog-behavior</option>
+                                <option value="paper-dialog-scrollable/paper-dialog-scrollable.html">paper-dialog-scrollable</option>
+                                <option value="paper-drawer-panel/paper-drawer-panel.html">paper-drawer-panel</option>
+                                <option value="paper-dropdown-menu/paper-dropdown-menu.html">paper-dropdown-menu</option>
+                                <option value="paper-fab/paper-fab.html">paper-fab</option>
+                                <option value="paper-header-panel/paper-header-panel.html">paper-header-panel</option>
+                                <option value="paper-icon-button/paper-icon-button.html">paper-icon-button</option>
+                                <option value="paper-input/paper-input.html">paper-input</option>
+                                <option value="paper-input/paper-textarea.html">paper-textarea</option>
+                                <option value="paper-input/paper-input-addon-behavior.html">paper-input-addon-behavior</option>
+                                <option value="paper-input/paper-input-behavior.html">paper-input-behavior</option>
+                                <option value="paper-item/paper-item.html">paper-item</option>
+                                <option value="paper-item/paper-item-body.html">paper-item-body</option>
+                                <option value="paper-item/paper-icon-item.html">paper-icon-item</option>
+                                <option value="paper-material/paper-material.html">paper-material</option>
+                                <option value="paper-menu/paper-menu.html">paper-menu</option>
+                                <option value="paper-menu/paper-submenu.html">paper-submenu</option>
+                                <option value="paper-menu-button/paper-menu-button.html">paper-menu-button</option>
+                                <option value="paper-progress/paper-progress.html">paper-progress</option>
+                                <option value="paper-radio-button/paper-radio-button.html">paper-radio-button</option>
+                                <option value="paper-radio-group/paper-radio-group.html">paper-radio-group</option>
+                                <option value="paper-ripple/paper-ripple.html">paper-ripple</option>
+                                <option value="paper-scroll-header-panel/paper-scroll-header-panel.html">paper-scroll-header-panel</option>
+                                <option value="paper-slider/paper-slider.html">paper-slider</option>
+                                <option value="paper-spinner/paper-spinner.html">paper-spinner</option>
+                                <option value="paper-styles/paper-styles.html">paper-styles</option>
+                                <option value="paper-tabs/paper-tabs.html">paper-tabs</option>
+                                <option value="paper-toast/paper-toast.html">paper-toast</option>
+                                <option value="paper-toggle-button/paper-toggle-button.html">paper-toggle-button</option>
+                                <option value="paper-toolbar/paper-toolbar.html">paper-toolbar</option>
+                                <option value="paper-tooltip/paper-tooltip.html">paper-tooltip</option>
+                                <option value="iron-a11y-announcer/iron-a11y-announcer.html">iron-a11y-announcer</option>
+                                <option value="iron-a11y-keys/iron-a11y-keys.html">iron-a11y-keys</option>
+                                <option value="iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">iron-a11y-keys-behavior</option>
+                                <option value="iron-ajax/iron-ajax.html">iron-ajax</option>
+                                <option value="iron-autogrow-textarea/iron-autogrow-textarea.html">iron-autogrow-textarea</option>
+                                <option value="iron-behaviors/iron-button-state.html">iron-button-state-behavior</option>
+                                <option value="iron-behaviors/iron-control-state.html">iron-control-state-behavior</option>
+                                <option value="iron-collapse/iron-collapse.html">iron-collapse</option>
+                                <option value="iron-component-page/iron-component-page.html">iron-component-page</option>
+                                <option value="iron-doc-viewer/iron-doc-viewer.html">iron-doc-viewer</option>
+                                <option value="iron-dropdown/iron-dropdown.html">iron-dropdown</option>
+                                <option value="iron-fit-behavior/iron-fit-behavior.html">iron-fit-behavior</option>
+                                <option value="iron-flex-layout/iron-flex-layout.html">iron-flex-layout</option>
+                                <option value="iron-form/iron-form.html">iron-form</option>
+                                <option value="iron-form-element-behavior/iron-form-element-behavior.html">iron-form-element-behavior</option>
+                                <option value="iron-icon/iron-icon.html">iron-icon</option>
+                                <option value="iron-icons/av-icons.html">iron-icons-av-icons</option>
+                                <option value="iron-icons/communication-icons.html">iron-icons-communication-icons</option>
+                                <option value="iron-icons/device-icons.html">iron-icons-device-icons</option>
+                                <option value="iron-icons/editor-icons.html">iron-icons-editor-icons</option>
+                                <option value="iron-icons/hardware-icons.html">iron-icons-hardware-icons</option>
+                                <option value="iron-icons/image-icons.html">iron-icons-image-icons</option>
+                                <option value="iron-icons/iron-icons.html">iron-icons-iron-icons</option>
+                                <option value="iron-icons/maps-icons.html">iron-icons-maps-icons</option>
+                                <option value="iron-icons/notification-icons.html">iron-icons-notification-icons</option>
+                                <option value="iron-icons/social-icons.html">iron-icons-social-icons</option>
+                                <option value="iron-iconset/iron-iconset.html">iron-iconset</option>
+                                <option value="iron-iconset-svg/iron-iconset-svg.html">iron-iconset-svg</option>
+                                <option value="iron-image/iron-image.html">iron-image</option>
+                                <option value="iron-input/iron-input.html">iron-input</option>
+                                <option value="iron-jsonp-library/iron-jsonp-library.html">iron-jsonp-library</option>
+                                <option value="iron-list/iron-list.html">iron-list</option>
+                                <option value="iron-localstorage/iron-localstorage.html">iron-localstorage</option>
+                                <option value="iron-media-query/iron-media-query.html">iron-media-query</option>
+                                <option value="iron-menu-behavior/iron-menu-behavior.html">iron-menu-behavior</option>
+                                <option value="iron-menu-behavior/iron-menubar-behavior.html">iron-menubar-behavior</option>
+                                <option value="iron-meta/iron-meta.html">iron-meta</option>
+                                <option value="iron-overlay-behavior/iron-overlay-behavior.html">iron-overlay-behavior</option>
+                                <option value="iron-pages/iron-pages.html">iron-pages</option>
+                                <option value="iron-range-behavior/iron-range-behavior.html">iron-range-behavior</option>
+                                <option value="iron-resizable-behavior/iron-resizable-behavior.html">iron-resizable-behavior</option>
+                                <option value="iron-selector/iron-selector.html">iron-selector</option>
+                                <option value="iron-signals/iron-signals.html">iron-signals</option>
+                                <option value="iron-test-helpers/iron-test-helpers.html">iron-test-helpers</option>
+                                <option value="iron-validatable-behavior/iron-validatable-behavior.html">iron-validatable-behavior</option>
+                                <option value="iron-validator-behavior/iron-validator-behavior.html">iron-validator-behavior</option>
+                            </select>
+                            <span class="glyphicon glyphicon-plus pointer" id="btnAddComponent" title="Add"></span>
+                        </div>
+                        <div id="divSelectedComponents">
+                        </div>
+                        <hr />
+                        <span>Add external css</span>
+                        <div class="form-group margin10">
+                            <input type="text" id="txtExternalResource" class="form-control" placeholder="Css Url" style="width: 90%; display: inline">
+                            <span class="glyphicon glyphicon-plus pointer" id="btnAddExtResource" title="Add"></span>
+                        </div>
+                        <div id="divExternalResources">
+                        </div>
+                    </div>
+                </div>
+                <div id="rightContainer" class="col-md-10 margin20">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-pills " role="tablist">
+                        <li role="presentation" class="active"><a href="#hcjPanel" aria-controls="hcjPanel" role="tab" data-toggle="tab">Html / Css / Js</a></li>
+                        <li role="presentation" id="componentCodeTab"><a href="#polymerPanel" aria-controls="polymerPanel" role="tab" data-toggle="tab">Component Code</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content ">
+                        <div role="tabpanel" class="tab-pane fade active in margin20" id="hcjPanel">
+                            <span id="hcjToggleControls">
+                                <label for="isHTML">HTML</label>
+                                <input type="checkbox" id="isHTML" checked="true" />
+                                <label for="isCss" class="marginLeft5">Css</label>
+                                <input type="checkbox" id="isCss" checked="true" />
+                                <label for="isJs" class="marginLeft5">Js</label>
+                                <input type="checkbox" id="isJs" checked="true" />
+                                <label for="isPreview" class="marginLeft5">Preview</label>
+                                <input type="checkbox" id="isPreview" checked="true" />
+                            </span>
+                            <span>
+                                <label for="isAutoRun" class="marginLeft5">Auto Refresh</label>
+                                <input type="checkbox" id="isAutoRun" checked="true" />
+                                <input type="button" id="btnRun" class="hide" value="Refresh" />
+                            </span>
+                            <span class="pull-right">
+                            </span>
+                            <div class="row" id="hcjControlPanels">
+                                <div class="col-md-3 hcjControlPanel" id="htmlPanel">
+                                    <textarea class="form-control" id="htmlPanelCtrl" rows="25" placeholder="Input Component HTML Template" style="width: 100%; height: 100%"></textarea>
+                                </div>
+                                <div class="col-md-3 hcjControlPanel" id="cssPanel">
+                                    <textarea class="form-control" id="cssPanelCtrl" rows="25" placeholder="Input Component CSS" style="width: 100%; height: 100%"></textarea>
+                                </div>
+                                <div class="col-md-3 hcjControlPanel" id="jsPanel">
+                                    <textarea class="form-control" id="jsPanelCtrl" rows="25" placeholder="Input Component JS Prototype" style="width: 100%; height: 100%"></textarea>
+                                </div>
+                                <div class="col-md-3 hcjControlPanel" id="previewPanel">
+                                    <iframe id="previewIFrame" frameborder="0" style="height:100%"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade margin20" id="polymerPanel">
+                            <div class="row" id="componentPanel">
+                                <div class="col-md-12" id="componentCodePanel">
+                                    <textarea class="form-control" readonly rows="20" style="width: 100%; height: 100%" id="componentCodePanelCtrl"></textarea>
+                                </div>
+                                <div class="col-md-4 hide" id="componentAttrsPanel">
+                                    <textarea class="form-control" readonly rows="20" style="width: 100%; height: 100%" id="componentUsgPanelCtrl"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>     
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/js-base64/base64.min.js"></script>
+    <script src="bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="bower_components/codemirror/mode/javascript/javascript.js"></script>
+    <script src="bower_components/codemirror/mode/css/css.js"></script>
+    <script src="bower_components/codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Left container slide [start]
+            // $('#btnToggleLeftContainer').click(function(){
+            //     $('#leftContainer').toggle( "slide", {direction: 'left', distance: $('#leftContainer').outerWidth - 100 });
+    
+            // });
+            //Left container slide [end]
+
+            //Container height set [start]
+            var windowHt = $(window).height() - 20;
+            $('#leftContainer').height(windowHt + 'px');
+            $('#rightContainer').height(windowHt + 'px');
+            $('#previewPanel').height(windowHt + 'px');
+            //Container height set [end]
+
+            //Add component [start]
+            var selectedComponents = [];
+            $('#btnAddComponent').click(function () {
+                var selVal = $('#componentList').val();
+                if (selVal) {
+                    selectedComponents.push({ value: 'bower_components/' + selVal, name: $('#componentList option:selected').text() });
+                    renderSelectedComponents(selectedComponents);
+                    run();
+                    $('#componentList').val('');
+                }
+            });
+
+            function renderSelectedComponents(selected) {
+                $('#divSelectedComponents').html('');
+                for (var i = 0; i < selected.length; i++) {
+                    $('#divSelectedComponents').append('<label><a href="' + selected[i].value + '" target="_blank">' + selected[i].name + '</a></label><span class="glyphicon glyphicon-minus pointer jRemoveComponent" index="' + i + '" title="Remove"></span><br />');
+                }
+            }
+
+            $('body').on('click', '.jRemoveComponent', function () {
+                selectedComponents.splice(parseInt($(this).attr('index')), 1);
+                renderSelectedComponents(selectedComponents);
+                run();
+            });
+
+            //Add component [end]
+
+            //Add external resource [start]
+            var extCss = [];
+            var extJs = [];
+            $('#btnAddExtResource').click(function () {
+                var url = $('#txtExternalResource').val();
+                if (url) {
+                    url = url.toLowerCase();
+                    url = url.trim();
+                    if (url.endsWith('.css')) {
+                        extCss.push(url);
+                        renderExternalResources(extCss);
+                        run();
+                        $('#txtExternalResource').val('');
+                    }                    
+                }                
+            });
+
+            function renderExternalResources(extCss) {
+                $('#divExternalResources').html('');
+                for (var i = 0; i < extCss.length; i++) {
+                    $('#divExternalResources').append('<label><a href="' + extCss[i] + '" target="_blank">' + extCss[i].substr(extCss[i].lastIndexOf('/')+1) + '</a></label><span class="glyphicon glyphicon-minus pointer jRemoveExternalResource" index="' + i + '" title="Remove"></span><br />');
+                }
+            }
+
+            $('body').on('click', '.jRemoveExternalResource', function () {
+                extCss.splice(parseInt($(this).attr('index')), 1);
+                renderExternalResources(selectedComponents);
+                run();
+            });
+
+            //Add external resource [end]
+
+
+            //Component name handling [start]            
+            function getComponentName() {
+                if (txtComponentName.value)
+                    return 't-' + txtComponentName.value.trim().replace(' ', '-');
+                else
+                    return 't-demo';
+            }
+            //Component name handling [end]
+
+            //HCJ Panels hide/show && default code && code mirror [start]
+            $('#isHTML, #isCss, #isJs, #isPreview').bind('change', function () {
+                setHCJVisibility();
+            });
+
+            function setHCJVisibility() {
+                if ($('#isHTML').is(':checked'))
+                    $('#htmlPanel').show();
+                else
+                    $('#htmlPanel').hide();
+
+                if ($('#isCss').is(':checked'))
+                    $('#cssPanel').show();
+                else
+                    $('#cssPanel').hide();
+
+                if ($('#isJs').is(':checked'))
+                    $('#jsPanel').show();
+                else
+                    $('#jsPanel').hide();
+
+                if ($('#isPreview').is(':checked'))
+                    $('#previewPanel').show();
+                else
+                    $('#previewPanel').hide();
+
+                var total = $('#hcjToggleControls input[type="checkbox"]:checked').length;
+                if (total) {
+                    $('#hcjControlPanels .hcjControlPanel:visible').removeClass().addClass('hcjControlPanel col-md-' + 12 / total);
+                }
+            }
+                        
+            var isDefaultSet= false;
+            function setDefaultCode() {
+                if(window.localStorage.componentCode){
+                    var componentCode = JSON.parse(window.localStorage.componentCode);
+                    htmlEditor.setValue(componentCode.html);
+                    cssEditor.setValue(componentCode.css);
+                    jsEditor.setValue(componentCode.js);
+                    $('#txtComponentName').val(componentCode.name);
+                    $('#txtComponentDesc').val(componentCode.description);
+                    extCss = componentCode.externalCss;
+                    selectedComponents = componentCode.selectedComponents
+                }
+                else{                    
+                    var htmlDefaultCode = "<div>\n" +
+                                        "   Welcome to component builder.\n </br>" +
+                                        "   Your basic <b>{{componentName}}</b> is ready, give a try by changing default html, css and js\n" +
+                                        "</div>\n";
+                    htmlEditor.setValue(htmlDefaultCode);
+
+                    var cssDefaultCode = ":host b{\n" +
+                                            "   color: red\n" +
+                                            "}\n";
+                    cssEditor.setValue(cssDefaultCode);
+
+                    var jsDefaultCode = "//all properties declarations goes here\n" +
+                                        "properties: {\n" +
+                                        "   componentName: {\n" +
+                                        "       type: String,\n" +
+                                        "       value: '{{COMPONENT_NAME}}',\n" +
+                                        "   }\n" +
+                                        "},\n" +
+                                        "//all initialization code goes here like jquery document ready function etc    \n" +
+                                        "ready: function(){\n" +
+                                        "   //alert('Component is ready.');\n" +
+                                        "}\n";
+                    jsDefaultCode = jsDefaultCode.replace(/{{COMPONENT_NAME}}/g, getComponentName());
+                    jsEditor.setValue(jsDefaultCode);
+                }
+
+                run();
+                renderSelectedComponents(selectedComponents);
+                renderExternalResources(extCss);
+                isDefaultSet = true;
+            }
+            
+            var htmlEditor = null;
+            var cssEditor = null;
+            var jsEditor = null;
+            var compCodeEditor = null;
+            function setCodeMirrorEditAreas(){
+                htmlEditor = CodeMirror.fromTextArea(document.getElementById("htmlPanelCtrl"), {
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    mode: {name: "xml", htmlMode: true}
+                  });
+                cssEditor = CodeMirror.fromTextArea(document.getElementById("cssPanelCtrl"), {
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    mode: {name: "css"}
+                  });
+                jsEditor = CodeMirror.fromTextArea(document.getElementById("jsPanelCtrl"), {
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    mode: {name: "javascript"}
+                  });
+
+                compCodeEditor = CodeMirror.fromTextArea(document.getElementById("componentCodePanelCtrl"), {
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    readOnly: true,
+                    mode: {name: "htmlmixed"}
+                  });
+
+                htmlEditor.on('change', onEditorChange);
+                cssEditor.on('change', onEditorChange);
+                jsEditor.on('change', onEditorChange);
+                
+                htmlEditor.setSize(null, windowHt);
+                cssEditor.setSize(null, windowHt);
+                jsEditor.setSize(null, windowHt);
+
+                $('#componentCodeTab, #componentCodeTab a').click(function(){
+                    setTimeout(function(){
+                        compCodeEditor.refresh(); // refresh hidden control on show to display code
+                        compCodeEditor.setCursor(1);
+                    }, 1000);
+                });
+            }
+
+            setHCJVisibility();
+            setCodeMirrorEditAreas();
+            setDefaultCode();      
+
+            //HCJ Panels hide/show && default code && code mirror [end]
+
+            //Preview [start]
+
+            $('#isAutoRun').bind('change', function () {
+                if ($('#isAutoRun').is(':checked')) {
+                    $('#btnRun').addClass('hide');
+                }
+                else {
+                    $('#btnRun').removeClass('hide');
+                }
+            });
+
+            $('#btnRun').click(function () {
+                run()
+            });
+
+
+            function onEditorChange() {                
+                if (isDefaultSet && $('#isAutoRun').is(':checked')) {
+                    run();
+                }
+            };
+
+            var previewInProgress = false;
+            var timer = null;
+            function run() {
+                if (!previewInProgress) {
+                    var componentTemplate = generateComponent();
+                    previewInProgress = true;
+                    var previewXhr = setPreviewOutput({ html: Base64.encode(componentTemplate) });
+                    if (!previewXhr) {
+                        return;
+                    }
+                    previewInProgress = false;
+                    persistData();
+                } else {
+                    if (timer)
+                        clearTimeout(timer);
+                    timer = setTimeout(run, 1000);
+                }
+                setComponentCodeInUI();
+            }
+
+            function persistData(){
+                window.localStorage.setItem('componentCode', JSON.stringify({ selectedComponents: selectedComponents, externalCss: extCss, html: htmlEditor.getValue(), css: cssEditor.getValue(), js: jsEditor.getValue(),
+                name: txtComponentName.value, description: txtComponentDesc.value}));
+            }
+
+            function generateComponent(noHtmlWrapper) {
+                var componentName = getComponentName();
+                var htmlWrapper = "<!DOCTYPE html>" +
+                                    "<html>" +
+                                    "   <head>" +
+                                    "       {{HEAD}}" +
+                                    "   </head>" +
+                                    "<body>" +
+                                    "   {{COMPONENT}}" +
+                                    "   <script src=\"bower_components/jquery/dist/jquery.min.js\"><\/script>" +
+                                    "</body>" +
+                                    "</html>";
+                var headContent = "<script src=\"bower_components/webcomponentsjs/webcomponents-lite.js\"><\/script>\n\n" +
+                                    "<link rel=\"import\" href=\"bower_components/polymer/polymer.html\">\n\n" +
+                                    "{{COMPONENT_IMPORTS}}" +                                    
+                                    "<title>{{TITLE}}</title>\n\n";
+                var componentContent = "<dom-module id=\"{{COMPONENT_NAME}}\">\n" +
+                                        "{{EXTERNAL_CSS}}" +                                        
+                                    "   <style>{{CSS_CODE}}<\/style>\n" +
+                                    "   <template>{{TEMPLATE_CODE}}</template>\n" +
+                                    "   <script>\n" +
+                                    "       HTMLImports.whenReady(function() {\n" +
+                                    "           Polymer({\n" +
+                                    "               is: \"{{COMPONENT_NAME}}\", \n" +
+                                    "               {{JS_CODE}}\n" +
+                                    "           });\n" +
+                                    "       });\n" +
+                                    "   <\/script>\n" +
+                                    "</dom-module>\n" +
+                                    "<{{COMPONENT_NAME}}></{{COMPONENT_NAME}}>";
+
+                componentContent = componentContent.replace(/{{TEMPLATE_CODE}}/g, htmlEditor.getValue());
+                componentContent = componentContent.replace(/{{CSS_CODE}}/g, cssEditor.getValue());
+                componentContent = componentContent.replace(/{{JS_CODE}}/g, jsEditor.getValue());
+                componentContent = componentContent.replace(/{{COMPONENT_NAME}}/g, componentName);
+                var extCssString = '';
+                if (extCss && extCss.length) {
+                    for (var i = 0; i < extCss.length; i++) {
+                        extCssString += '<link rel="import" type="css" href=\"' + extCss[i] + '">\n\n';
+                    }
+                }
+                componentContent = componentContent.replace(/{{EXTERNAL_CSS}}/g, extCssString);
+
+                var importsString = '';
+                if (selectedComponents && selectedComponents.length) {
+                    for (var i = 0; i < selectedComponents.length; i++) {
+                        importsString += '<link rel=\"import\" href=\"' + selectedComponents[i].value + '">\n\n';
+                    }
+                }
+                headContent = headContent.replace(/{{COMPONENT_IMPORTS}}/g, importsString);
+                headContent = headContent.replace(/{{TITLE}}/g, componentName + '-' + txtComponentDesc.value);
+
+
+                if (!noHtmlWrapper) {  //default case with out any param
+                    htmlWrapper = htmlWrapper.replace(/{{HEAD}}/g, headContent);
+                    htmlWrapper = htmlWrapper.replace(/{{COMPONENT}}/g, componentContent);
+                    return htmlWrapper;
+                }
+                else {
+                    return headContent + componentContent;
+                }
+            }
+
+            function setPreviewOutput(componentTemplate) {
+                try{
+                    sessionStorage.setItem('Component_Template', JSON.stringify(componentTemplate));
+                    reloadPreview();
+                    return true;
+                }
+                catch(e){
+                    throw Error('Session storage not available to store template data!');
+                    return false;
+                }
+            }
+
+            function reloadPreview() {
+                var iframe = document.getElementById('previewIFrame');
+                iframe.srcdoc = getHTML();
+            }
+
+            function getHTML() {
+                var templateObj = sessionStorage['Component_Template'];
+                templateObj = JSON.parse(templateObj);
+                return Base64.decode(templateObj.html);                
+            }
+
+            function setComponentCodeInUI() {
+                compCodeEditor.setValue(generateComponent(true));
+                return;
+
+                var attrs = '';
+                var componentProto = JSON.parse('{' + jsEditor.getValue() + '}');
+                if (componentProto.properties) {
+                    for (var prop in componentProto.properties) {
+                        if (componentProto.properties.hasOwnProperty(prop) && prop.reflectToAttribute) {
+                            if ((prop.type == String || prop.type == Number) && prop.value) {
+                                attrs += ' ' + prop.name + '=\"' + prop.value + '\"';
+                            }
+                            else if (prop.type == Boolean && prop.value) {
+                                attrs += ' ' + prop.name;
+                            }
+                            else if ((prop.type == Array || prop.type == Object) && prop.value) {
+                                attrs += ' ' + prop.name + '=\"' + JSON.stringify(prop.value) + '\"';
+                            }
+                        }
+                    }
+                }
+
+                var componentUsageStr = '<{{COMPONENT_NAME}} {{ATTRIBUTES}}></{{COMPONENT_NAME}}>'.replace(/{{COMPONENT_NAME}}/g, getComponentName());
+                componentUsageStr = componentUsageStr.replace(/{{ATTRIBUTES}}/g, attrs);
+                $('#componentCodePanelCtrl').val(generateComponent(true));
+                $('#componentUsgPanelCtrl').val(componentUsageStr);
+            }
+
+            //Preview [end]
+        })
+    </script>
+
+</body>
+
+</html>
+
